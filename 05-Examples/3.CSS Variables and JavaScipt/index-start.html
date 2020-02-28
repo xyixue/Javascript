@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>3.CSS Variables and JavaScipt</title>
+</head>
+
+<body>
+    <!-- <h2>Update CSS Variables with <span class='hl'>JS</span></h2> -->
+
+    <div class="controls">
+        <label for="spacing">Spacing:</label>
+        <input id="spacing" type="range" name="spacing" min="10" max="200" value="5" data-sizing='px'>
+
+        <label for="blur">Blur:</label>
+        <input id="blur" type="range" name="blur" min="0" max="25" value="2" data-sizing='px'>
+
+        <label for="base">Base Color</label>
+        <input id="base" type="color" name="base" value="#ffc600" data-sizing=''>
+    </div>
+
+    <img src="./girl.jpg">
+
+    <style>
+        /* 第一种 */
+        /* img {
+            padding: 5px;
+            filter: blur(2px);
+            background-color: #ffc600;
+        } */
+        
+         :root {
+            --spacing: 5px;
+            --blur: 2px;
+            --base: #ffc600;
+        }
+        
+        img {
+            padding: var(--spacing);
+            filter: blur(var(--blur));
+            background-color: var(--base);
+        }
+        
+        body {
+            text-align: center;
+            background: #193549;
+            color: white;
+            font-family: 'helvetica neue', sans-serif;
+            font-weight: 100;
+            font-size: 50px;
+        }
+        
+        .controls {
+            margin-bottom: 50px;
+        }
+        
+        input {
+            width: 100px;
+        }
+    </style>
+
+    <script>
+        // 第一种
+        /* const inputs = document.querySelectorAll('input')
+        const img = document.querySelector('img')
+        console.log([inputs]);
+
+        function handUpdate() {
+            // console.log(`${this.name} = ${this.value}`);
+            if (this.name === 'spacing') {
+                img.style.padding = `${this.value}px`
+            }
+            if (this.name === 'blur') {
+                img.style.filter = `blur(${this.value}px)`
+            }
+            if (this.name === 'base') {
+                img.style.backgroundColor = this.value;
+            }
+        }
+        inputs.forEach(input => input.addEventListener('change', handUpdate)) */
+        const inputs = document.querySelectorAll('input')
+
+        function handUpdate() {
+            document.documentElement.style.setProperty(`--${this.name}`, `${this.value}` + `${this.dataset.sizing}`)
+        }
+
+        inputs.forEach(input => input.addEventListener('change', handUpdate))
+    </script>
+
+</body>
+
+</html>

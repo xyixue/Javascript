@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JS Reference VS Copy</title>
+</head>
+
+<body>
+
+    <script>
+        // 原始数据类型变量， 变量复制
+        // let name = 'Arvin';
+        // let name2 = name;
+        // console.log(name, name2);
+        // name = '🍎';
+        // console.log(name, name2);
+
+        // let age = 23;
+        // let age2 = age;
+        // console.log(age, age2);
+        // age = 34;
+        // console.log(age, age2);
+
+        // with Arrays , 变量引用
+        const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
+        const team = players;
+        // team[3] = '🍇';
+
+        // 复制数组变量
+        const team2 = players.slice();
+        team2[3] = '🍎';
+        const team3 = Array.from(players);
+        team3[3] = '🍎';
+        const team4 = [...players];
+        team4[3] = '🍎';
+        const team5 = [].concat(players);
+        team5[3] = '🍎';
+
+
+        // with Objects
+        const person = {
+            name: 'Wes Bos',
+            age: 80
+        };
+
+        const dev = person;
+        // dev.name = '🍇';
+
+        // 浅复制对象类型变量
+        const dev2 = Object.assign({}, person, {
+            name: '🍎'
+        });
+        const dev3 = {...person
+        };
+        dev3.name = '🍎';
+
+
+
+        const author = {
+            name: 'Alice',
+            age: 34,
+            social: {
+                wechat: 'Alice Lala',
+                facebook: 'athor.alice'
+            }
+        }
+
+        const au2 = Object.assign({}, author);
+        au2.name = '🍎';
+        // au2.social.wechat = 'Lala - Alice --';
+
+        // 深复制对象类型变量
+        const au3 = JSON.parse(JSON.stringify(author));
+    </script>
+
+</body>
+
+</html>

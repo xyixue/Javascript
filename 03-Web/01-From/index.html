@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>表单验证</title>
+    <style>
+    body{
+        background-color: #333;
+    }
+    </style>
+</head>
+<body>
+    <form action="#" method="POST" name='loginForm' onsubmit="return validateForm()">
+        用户名: <input type="text" name="userName"><br>
+        密码: <input type="password" name="password"><br>
+        <input type="submit" value="提交">
+    </form>
+
+    <script src="./form.js"></script>
+</body>
+</html>

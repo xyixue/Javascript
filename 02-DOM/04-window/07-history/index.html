@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>history</title>
+    <style>
+        body {
+            background-color: darkslategrey;
+        }
+
+        .btn {
+            border: 1px solid #888;
+            padding: 10px 16px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn:hover {
+            color: dodgerblue;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="btn" onclick="window.location.assign('./new.html')">打开页面</button>
+    <!-- <button class="btn" onclick="window.history.forward()">下一个页面</button> -->
+    <button class="btn" onclick="window.history.go(1)">下一个页面</button> 
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Understanding JavaScript's Event</title>
+    <style>
+        html {
+            box-sizing: border-box;
+        }
+        
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+        
+        div {
+            width: 100%;
+            padding: 50px;
+        }
+        
+        .one {
+            background: thistle;
+        }
+        
+        .two {
+            background: mistyrose;
+        }
+        
+        .three {
+            background: coral;
+        }
+    </style>
+</head>
+
+<body class="bod">
+
+    <div class="one">
+        <div class="two">
+            <div class="three">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const divs = document.querySelectorAll('div')
+
+        function log(e) {
+            e.stopPropagation(); // 阻止事件的传递
+            console.log(this);
+        }
+
+        divs.forEach(div => div.addEventListener('click', log, {
+            // 事件冒泡和捕获，是指事件在元素上被触发的顺序，事件本身不会传递
+            // 事件的执行 ，必须有相应的动作触发，触发的动作不会传递。
+            // capture: true  //事件捕获  由内往外    被阻止后   点啥都是第一个
+            capture: false, //默认  冒泡   由外往内  被阻止后 点啥是啥
+            once: true // 函数被调用的次数
+        }))
+    </script>
+</body>
+
+</html>

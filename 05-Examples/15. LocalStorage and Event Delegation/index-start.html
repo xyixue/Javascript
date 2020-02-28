@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>LocalStorage</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <h2>每日清单</h2>
+        <p></p>
+        <ul class="tasks">
+            <li>加载清单...</li>
+        </ul>
+        <form class="add-tasks">
+            <input type="text" name="task" placeholder="" required>
+            <input type="submit" value="+ 添加">
+        </form>
+    </div>
+
+    <script>
+        const taskList = document.querySelector('.tasks');
+        const addTasks = document.querySelector('.add-tasks')
+        const tasks = JSON.parse(localStorage.getItem('tasks') || []);
+
+        function addTask(e) {
+            e.preventDefault();
+            const text = this.querySelector('[name=task]').value;
+            const task = {
+                text,
+                done: false
+            }
+            tasks.push(task);
+            localStorage.setItem('tasks', JSON.stringify(tasks))
+            showTasks(tasks, taskList);
+            // console.log(tasks);
+            this.reset();
+        }
+
+        function showTasks(tasks = [], taskList) {
+            taskList.innerHTML = tasks.map((task, i) => {
+                return `
+                <li>
+                <input type="checkbox" data-index=${i} id="task${i}" ${task.done?'checked':''}>
+                  <label for="task${i}">${task.text}</label>
+                </li>
+              `;
+            }).join('');
+        }
+
+        function toggleDone(e) {
+            const el = e.target;
+            if (!el.matches('input')) return;
+            const index = el.dataset.index;
+            tasks[index].done = !tasks[index].done
+            localStorage.setItem('tasks', JSON.stringify(tasks))
+                // console.log(index);
+        }
+
+        addTasks.addEventListener('submit', addTask);
+        showTasks(tasks, taskList);
+
+        taskList.addEventListener('click', toggleDone)
+
+        // const checkboxes = document.querySelectorAll('input[type=checkbox]');
+        // checkboxes.forEach(checkbox => checkbox.addEventListener('click', toggleDone))
+    </script>
+
+
+</body>
+
+</html>
